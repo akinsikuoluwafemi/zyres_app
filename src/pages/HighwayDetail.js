@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import { Link, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { Card, Input } from 'antd';
+import {  Input } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import {addToFavorites, removeFromFavorites, modifySelectedHighway, fetchRoadWorksAsync} from '../redux/actions/highwayActions';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { Typography } from '@material-ui/core';
-import Cookies from 'js-cookie';
 
 
 const HighwayDetailsWrapper = styled.div`
@@ -96,12 +95,14 @@ export default function HighwayDetail() {
       comments: highwayComment
     }));
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [colorCode, highwayComment]);
 
 
   useEffect(() => {
     dispatch(fetchRoadWorksAsync(name));
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
