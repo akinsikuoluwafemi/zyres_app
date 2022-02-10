@@ -226,7 +226,7 @@ export default function HighwayDetail() {
 
           ))}
             <div>
-              {roadWorks.length === 0 && 'No Roadworks'}
+              {roadWorks?.length === 0 && 'No Roadworks'}
           </div>
       </RoadWorkWrapper>
       )}

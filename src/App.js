@@ -4,9 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import HighwayDetail from './pages/HighwayDetail';
 import Favourites from './pages/Favourites';
 import styled from 'styled-components'
-import { Link, useHistory } from 'react-router-dom';
-import { addToFavorites } from './redux/actions/highwayActions';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Header = styled.div`
   display: flex;

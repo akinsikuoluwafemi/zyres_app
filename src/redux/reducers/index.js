@@ -1,18 +1,16 @@
-import { combineReducers } from "redux";
-import highwayReducer from "./highwayReducer";
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { createStore, compose, applyMiddleware } from 'redux';
+import rootReducer from './reducers/highwayReducer';
+import thunk from 'redux-thunk';
+
+const middleware = [thunk];
 
 
-// persist the cart reducer
-const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['highways']
-}
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const rootReducer =  combineReducers({
-  highways: highwayReducer
-});
+const store = createStore(
+  rootReducer,
+  composeEnhancer(applyMiddleware(...middleware)),
 
-export default persistReducer(persistConfig,rootReducer);
+);
+
+export default store;

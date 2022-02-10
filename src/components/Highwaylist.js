@@ -1,6 +1,5 @@
 import React from 'react';
 import HighwayItems from './HighwayItems';
-import { List } from 'antd';
 
 
 export default function Highwaylist({highways}) {
