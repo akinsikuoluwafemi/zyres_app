@@ -39,11 +39,16 @@ export default function HighwayItems({ highway }) {
 
   const dispatch = useDispatch();
 
+
   return (
-    <CardItems onClick={() => dispatch(selectAnHighway(highway)) } class="card mb-3 mr-3" style={{ cursor: 'pointer' }}>
+    <CardItems onClick={() => {
+      dispatch(selectAnHighway(highway))
+      console.log(highway)
+
+    }} class="card mb-3 mr-3" style={{ cursor: 'pointer' }}>
       <Link to={`/highway/${highway}`} >
       <ul>
-        <li >{ highway}</li>
+        <li >{highway}</li>
       </ul>
       </Link>
   </CardItems>

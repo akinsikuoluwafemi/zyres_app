@@ -4,7 +4,15 @@ const INITIAL_STATE = {
   isFetching: false,
   error: null,
   highways: [],
-  selectedHighway: null
+  selectedHighway: {
+    inFavorites: false,
+    name: '',
+    colorCode: '',
+    comments: ''
+  },
+  // favorites: [{inFavorites: true, name: "A1"}]
+  favorites: []
+
 
 }
 
@@ -32,6 +40,24 @@ const highwayReducer = (state = INITIAL_STATE, action) => {
         error: action.payload
       }
     case highwayTypes.SELECTED_HIGHWAY:
+      return {
+        ...state,
+        selectedHighway: { ...state.selectedHighway, name: action.payload }
+      }
+
+    case highwayTypes.ADD_TO_FAVORITES:
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload]
+      }
+
+    case highwayTypes.REMOVE_FROM_FAVORITES:
+      return {
+        ...state,
+        favorites: state.favorites.filter(highway => highway.name !== action.payload.name)
+      }
+
+    case highwayTypes.MODIFY_SELECTED_HIGHWAY:
       return {
         ...state,
         selectedHighway: action.payload

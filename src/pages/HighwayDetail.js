@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { Card } from 'antd';
+import { Card, Input } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-
+import {addToFavorites, removeFromFavorites, modifySelectedHighway} from '../redux/actions/highwayActions';
 
 
 const HighwayDetailsWrapper = styled.div`
@@ -37,17 +37,61 @@ const Highwaycard = styled.div`
   }
 `
 
+const ActionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+`
+
+const CommentWrapper = styled.div`
+  text-align: center;
+  margin-top: 2rem;
+
+
+`
+
 
 export default function HighwayDetail() {
 
+  const { TextArea } = Input;
+
+
+  const dispatch = useDispatch();
+
   const {name} = useParams();
 
+  // const selectedHighway = useSelector(state => {
+  //   return { ...state.selectedHighway, name };
+  // });
+
+  const [highwayComment, setHighwayComment] = useState('')
+  const [colorCode, setColorCode] = useState('');
+
   const selectedHighway = useSelector(state => {
-    return state.selectedHighway || name;
+    return state.selectedHighway
   });
 
-  console.log(selectedHighway);
 
+  const favoritesArr = useSelector(state => {
+    return state.favorites;
+  });
+
+  console.log(favoritesArr);
+
+
+  useEffect(() => {
+
+    dispatch(modifySelectedHighway({
+      ...selectedHighway,
+      colorCode: colorCode,
+      comments: highwayComment
+    }));
+
+  },[colorCode, highwayComment]);
+
+
+  console.log(selectedHighway);
 
 
 
@@ -60,21 +104,63 @@ export default function HighwayDetail() {
       <HighwayDetailsWrapper>
 
         <div>
-
           <Highwaycard>
 
             <p>Name: <span>{name} Highway</span></p>
 
           </Highwaycard>
 
-
-
         </div>
 
         <div>
 
 
-          <button type="button" class={`btn btn-primary`}>Add To Favorites</button>
+
+          {
+            selectedHighway.inFavorites ? (
+
+              <ActionWrapper>
+               <button onClick={() => {
+                  dispatch(removeFromFavorites(selectedHighway));
+                  selectedHighway.inFavorites = false;
+
+                }} type="button" class={`btn btn-danger`}>Remove From Favorites</button>
+
+                <div>
+                  <p className="mt-3">Add Color Code:</p>
+                  <Input value={colorCode} onChange={(e)=> setColorCode(e.target.value)}  placeholder="Add Color Code" />
+                </div>
+
+                <CommentWrapper>
+                  <p style={{textAlign: 'center', fontWeight: 'bold'}}>Add A comment</p>
+                  <TextArea placeholder="Add a comment" value={highwayComment} onChange={(e) => setHighwayComment(e.target.value) } rows={4} style={{ width: '100%'}} />
+                </CommentWrapper>
+
+
+            </ActionWrapper>
+
+            ): (
+            <button onClick={() => {
+            dispatch(addToFavorites(selectedHighway));
+            selectedHighway.inFavorites = true;
+
+          }} type="button" class={`btn btn-success`}>Add To Favorites</button>
+
+            )
+          }
+
+
+          {/* <button onClick={() => {
+            dispatch(addToFavorites(selectedHighway));
+            selectedHighway.inFavorites = true;
+            alert('added')
+
+          }} type="button" class={`btn btn-success`}>Add to Favorites</button>
+ */}
+
+
+
+
 
         </div>
 

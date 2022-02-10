@@ -50,9 +50,17 @@ export const addToFavorites = (highway) => {
   }
 }
 
-export const removeFromFavotites = (highway) => {
+export const removeFromFavorites = (highway) => {
   return {
     type: highwayTypes.REMOVE_FROM_FAVORITES,
     payload: highway
   }
 }
+
+export const modifySelectedHighway = (highway) => {
+  return {
+    type: highwayTypes.MODIFY_SELECTED_HIGHWAY,
+    payload: highway
+  }
+}
+
