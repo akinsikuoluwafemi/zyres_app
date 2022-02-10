@@ -10,7 +10,7 @@
 
 ### 🏠 [Homepage](https://github.com/akinsikuoluwafemi/zyres_app)
 
-### ✨ [Demo](https://github.com/akinsikuoluwafemi/ostrom)
+### ✨ [Demo](zyres.netlify.app)
 
 
 ### Project Description
