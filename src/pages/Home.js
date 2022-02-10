@@ -12,6 +12,8 @@ export default function Home() {
   useEffect(() => {
     dispatch(fetchHighwayAsync());
 
+/* eslint-disable react-hooks/exhaustive-deps */
+
   },[])
 
   const highways = useSelector(state => {
