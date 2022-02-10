@@ -1,17 +1,13 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import rootReducer from './reducers/highwayReducer';
+import { createStore,  applyMiddleware } from 'redux';
+import  rootReducer  from './reducers/highwayReducer';
 import thunk from 'redux-thunk';
+import { persistStore } from 'redux-persist';
+
 
 const middleware = [thunk];
 
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(
-  rootReducer,
-  composeEnhancer(applyMiddleware(...middleware)),
+export const store = createStore(rootReducer, applyMiddleware(...middleware));
 
-);
-
-export default store;
-
+export const persistor = persistStore(store);

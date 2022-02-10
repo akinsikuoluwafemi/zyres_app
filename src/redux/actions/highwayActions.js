@@ -27,7 +27,6 @@ export const fetchHighwayAsync = () => {
   return async (dispatch) => {
     dispatch(fetchHighwaysPending());
       try {
-
         const {data} = await axios.get(`https://verkehr.autobahn.de/o/autobahn/`)
         dispatch(fetchHighwaysSuccess(data));
       } catch (err) {
@@ -35,6 +34,42 @@ export const fetchHighwayAsync = () => {
       }
     }
 }
+
+const fetchRoadworksPending = () => {
+  return {
+    type: highwayTypes.FETCH_ROADWORKS_PENDING
+  }
+}
+
+const fetchRoadworksSuccess = (roadworks) => {
+  return {
+    type: highwayTypes.FETCH_ROADWORKS_SUCCESS,
+    payload: roadworks
+  }
+}
+
+const fetchRoadworksError = (error) => {
+  return {
+    type: highwayTypes.FETCH_ROADWORKS_ERROR,
+    payload: error
+  }
+}
+
+export const fetchRoadWorksAsync = (id) => {
+  return async (dispatch) => {
+    dispatch(fetchRoadworksPending());
+    try {
+      const {data} = await axios.get(`https://verkehr.autobahn.de/o/autobahn/${id}/services/roadworks`)
+        dispatch(fetchRoadworksSuccess(data));
+    } catch (err) {
+      dispatch(fetchRoadworksError(err));
+    }
+
+  }
+
+}
+
+
 
 export const selectAnHighway = (highway) => {
   return {
