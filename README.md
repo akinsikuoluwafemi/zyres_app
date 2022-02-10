@@ -1,16 +1,14 @@
 <h1 align="center">Welcome to Zyres App</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/akinsikuoluwafemi/ostrom" target="_blank">
-
-  </a>
+ 
 </p>
 
 
 
 ### 🏠 [Homepage](https://github.com/akinsikuoluwafemi/zyres_app)
 
-### ✨ [Demo](zyres.netlify.app)
+### ✨ [Demo](https://zyres.netlify.app)
 
 
 ### Project Description
